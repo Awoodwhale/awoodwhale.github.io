@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="keywords" content="woodwhale">
+  
+  <meta name="author" content="woodwhale" />
+  <meta name="description" content="A happy woodwhale!" />
+  
+  
+  <title>
+    
+      【Python】Step Into Python Class 
+      
+      
+      |
+    
+     木鲸的记录
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/woodwhale.ico">
+    <link rel="icon" href="/images/woodwhale.ico">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+    
+<link rel="stylesheet" href="/css/figcaption/mac-block.css">
+
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="木鲸的记录" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/woodwhale.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">woodwhale</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">文章</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">分类</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">友链</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【Python】Step Into Python Class</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="更新时间"></i>
+          2023-06-02 11:26:50
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="分类"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/Python/" title="Python">
+                    <b>#</b> Python
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="标签"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/Python/" title="Python">
+                    #Python
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="【Python】Step-Into-Python-Class"><a href="#【Python】Step-Into-Python-Class" class="headerlink" title="【Python】Step Into Python Class"></a>【Python】Step Into Python Class</h1><h2 id="Before-All"><a href="#Before-All" class="headerlink" title="Before All"></a>Before All</h2><p>Python作为一门<code>面向过程</code>兼容<code>面向对象</code>的语言，在面向对象中，使用<code>class</code>关键字来申明一个类。</p>
+<p>But，是不是应该深入考虑一下这个<code>class</code>的底层实现过程呢？（不考虑CPython，仅仅考虑Python这一层）</p>
+<h2 id="申明一个类"><a href="#申明一个类" class="headerlink" title="申明一个类"></a>申明一个类</h2><p>非常简单的申明方式:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">X</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>这样就声明了一个<code>X</code>类。</p>
+<p>如果我们实现Java中类似<code>构造函数</code>这样的功能呢？可以使用<code>__init__</code>这个魔术方法，这个方法在类<code>创建</code>之后会被调用（这里的创建到底指的是什么，后面会谈到）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">X</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, arg1, arg2</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self.arg1 = arg1</span><br><span class="line">        self.arg2 = arg2</span><br></pre></td></tr></table></figure>
+
+<h3 id="经典类与新式类"><a href="#经典类与新式类" class="headerlink" title="经典类与新式类"></a>经典类与新式类</h3><p>首先，先说结论——<code>Python3中都是新式类，Python2中有新式类也有经典类</code></p>
+<p><strong>什么是新式类？</strong></p>
+<ul>
+<li>继承自<code>object</code>的，都是新式类</li>
+</ul>
+<p><strong>什么是经典类？</strong></p>
+<ul>
+<li>不继承<code>object</code>的，叫作经典类</li>
+</ul>
+<p><strong>为什么Python3中都是新式类？</strong></p>
+<ul>
+<li>因为Python3中，申明一个class的时候，默认继承了<code>object</code></li>
+</ul>
+<p><strong>为什么Python2中有新式类也有经典类？</strong></p>
+<ul>
+<li>在Python2中，显式申明<code>class X(object)</code>，那么这个类就是新式类</li>
+<li>如果没有显式申明，而是单纯的申明一个<code>class X:pass</code>，那么这个类就是经典类</li>
+</ul>
+<p>在<code>Python 2.1</code>之前，经典类是唯一可用的形式，在<code>Python 2.2</code>才引入了新式类。</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><h3 id="单继承"><a href="#单继承" class="headerlink" title="单继承"></a>单继承</h3><p>Python中想声明一个class继承了某个class，可以使用如下的方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">X</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>如上的代码，<code>X</code>继承了<code>object</code>这个类，而在<code>Python3</code>中，如果没有显式申明继承<code>object</code>也没关系，默认是继承自<code>object</code>的。</p>
+<p>但是在<code>Python2</code>中，如果不显式申明继承<code>object</code>，那么这个类就不能调用<code>object</code>中的一些属性和方法。</p>
+<h3 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h3><p>在Python中，可以<code>多继承</code>。这点是其他语言不兼容的（C++除外）。</p>
+<p>很多官方的库其实都用到了多继承的特性，比如<code>socketserver</code>这个库</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/88e7da2d7125cda83fe0dcf2363ac093.png" alt="image-20230530101218007"></p>
+<p>可以看到<code>ThreadingUDPServer</code>和<code>ThreadingTCPServer</code>都继承了<code>ThreadingMixIn</code>这个类，然后继承自己的父类</p>
+<p><code>多继承</code>有好处也有坏处，好处是可以灵活运用，坏处就是如果随意使用，很难看懂代码而且会存在一些属性冲突。</p>
+<h3 id="Mixins"><a href="#Mixins" class="headerlink" title="Mixins"></a>Mixins</h3><p>Mixins是一种规范，上述<code>socketserver</code>中的两个类就是使用了<code>Mixins</code>的规范：</p>
+<ul>
+<li>需要混入使用的特性类，写在前面，例如这个<code>ThreadingMixIn</code>，就是需要混入使用的<code>线程类</code></li>
+<li>需要继承的父类放在最后，例如这个<code>UDPServer</code>，就是<code>ThreadingUDPServer</code>需要继承的父类</li>
+<li>所有需要插入的Mixin特性的类以<code>MixIn</code>结尾</li>
+</ul>
+<p>Minins只是一种开发规范，而不是硬性规定~</p>
+<h2 id="菱形继承"><a href="#菱形继承" class="headerlink" title="菱形继承"></a>菱形继承</h2><p>由于Python的多继承特性，可以引入一种新的继承模式——<code>菱形继承</code></p>
+<p>什么是菱形继承？其实是多继承的一种特殊的形式。之所以叫作<code>菱形继承</code>是因为，形状和<code>菱形</code>类似，也可以叫作<code>钻石继承</code></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/9751e539dccefd773675e7b67d4cd89b.png" alt="image-20230530102815001"></p>
+<p>转化为代码的形式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span>(B, C):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>那么上述继承关系就会出现一种现象，<code>D</code>应该怎么样继承<code>B、C</code>的属性？</p>
+<p>假设<code>B</code>和<code>C</code>都具有同一个方法<code>func1</code>，那么D调用这个方法是怎么找的呢？</p>
+<p>我们可以查看<code>D.__mro__</code>，这个元组，或者调用<code>D.mro()</code>这个方法获取一个列表</p>
+<blockquote>
+<p>这里的mro是Method Resolution Order的缩写，也就是 <code>方法解析顺序</code></p>
+</blockquote>
+<p>无论是上述得到的元组还是列表，都存储了<code>D</code>这个类的<code>方法解析顺序</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(D.mro())</span><br><span class="line"><span class="built_in">print</span>(D.__mro__)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">[&lt;class &#x27;__main__.D&#x27;&gt;, &lt;class &#x27;__main__.B&#x27;&gt;, &lt;class &#x27;__main__.C&#x27;&gt;, &lt;class &#x27;__main__.A&#x27;&gt;, &lt;class &#x27;object&#x27;&gt;]</span></span><br><span class="line"><span class="string">(&lt;class &#x27;__main__.D&#x27;&gt;, &lt;class &#x27;__main__.B&#x27;&gt;, &lt;class &#x27;__main__.C&#x27;&gt;, &lt;class &#x27;__main__.A&#x27;&gt;, &lt;class &#x27;object&#x27;&gt;)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>所以，<code>D</code>去查找属性或者方法的时候，就是按照这个列表的顺序往后查找，最后找公共父类<code>object</code>，如果这个列表中的所有类都没有某个属性或者方法，那么就会报错。</p>
+<p>至于这个<code>mro</code>列表是如何生成的，在不同的Python版本，有一定的差异：</p>
+<ul>
+<li>经典类使用DFS</li>
+<li>Python 2.2 的新式类使用MRO</li>
+<li>Python 2.3 的新式类使用C3算法，同时也是Python3唯一支持的算法</li>
+</ul>
+<p>下面就详细说说各种版本的<code>MRO</code>方法！</p>
+<h3 id="经典类的DFS"><a href="#经典类的DFS" class="headerlink" title="经典类的DFS"></a>经典类的DFS</h3><p>经典类的MRO方法非常简单，就是<code>从左向右的DFS</code>。</p>
+<p>按照上述的图片，其遍历顺序是<code>[D,B,A,C,A]</code>，考虑到重复遍历跳过，那么真实的顺序是<code>[D,B,A,C]</code></p>
+<p>但是，这样会存在什么样的问题呢？</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/a23c0a559aec81b0e071cf11ce2f09f5.png" alt="image-20230530111838949"></p>
+<p>如果按照<code>从左向右的DFS</code>顺序来进行MRO，那么我在调用<code>D.show()</code>的时候，会发生什么？</p>
+<ul>
+<li>由于是从左往右，先去找<code>B</code>有没有<code>show</code>，发现B没有，就去找<code>A</code></li>
+<li>在<code>A</code>直接找到了<code>show()</code></li>
+<li>所以<code>D</code>的对象会调用<code>A</code>中的<code>show()</code></li>
+</ul>
+<p>但是我们想要的效果是D去调用<code>C.show()</code>，这种MRO方式，严重违背了这种特性！</p>
+<h3 id="新式类的BFS"><a href="#新式类的BFS" class="headerlink" title="新式类的BFS"></a>新式类的BFS</h3><p>Python2.2后，引入了<code>新式类</code>，针对新式类，有一种全新的MRO方法</p>
+<ul>
+<li><code>经典类</code>仍然使用<code>从左向右的DFS</code></li>
+<li><code>新式类</code>使用<code>从左想右的BFS</code></li>
+</ul>
+<p>由于新式类都会继承<code>object</code>，所以之前的继承图变成了这样:</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/5f6c2ed604df3a960fb9f3d1d5727a16.png" alt="image-20230530114846869"></p>
+<p><code>从左向右的BFS</code>算法的MRO顺序就是<code>[D,B,C,A,object]</code></p>
+<p>这样想要执行<code>D.show()</code>的时候，就可以正常继承调用<code>C.show()</code>了</p>
+<p>但是，BFS就没有<code>特殊情况</code>吗？还是有的！</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/4cf04c30aa6a8d886dd4db608b3d1814.png" alt="image-20230530131330330"></p>
+<p>翻译成代码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">E</span>(B, C):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">F</span>(C, B):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">G</span>(E, F):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>BFS(广度优先)的结果是<code>[G, E, F, B, C, object]</code></li>
+<li>对于<code>F</code>，搜索顺序是<code>[F, C , B, ojbect]</code> (object最后查找的原则)</li>
+<li>对于<code>G</code>，搜索顺序是<code>[G, E, F, B, C, object]</code></li>
+<li>F中的查询顺序是<code>CB</code> ，而G中的查询顺序是<code>BC</code></li>
+<li>上述的查询顺序违背了<code>单调性原则</code>，这个原则的意思是:</li>
+<li>如果一个类X从父类X1和X2中派生出来，在MRO中，如果X1早于X2，那么在X的任何子类中都应该保持这个次序。</li>
+<li>上述的F的子类G明显违背了这个原则！</li>
+</ul>
+<p>由于上述的<code>BFS</code>算法仅仅针对<code>新式类</code>，对于<code>经典类</code>的<code>DFS</code>算法仍然违背了之前的<code>本地优先级</code>原则</p>
+<h3 id="新式C3算法"><a href="#新式C3算法" class="headerlink" title="新式C3算法"></a>新式C3算法</h3><p>在<code>Python 2.3</code>之后采用了<code>C3算法</code>来处理MRO</p>
+<p>C3算法解决了<code>单调性问题</code>和<code>只能继承无法重写</code>问题，是基于<code>拓扑排序</code>的思想来解决问题的。</p>
+<p>Python官方文档在2.3版本给出了相关的详细讲解<a target="_blank" rel="noopener" href="https://www.python.org/download/releases/2.3/mro/">The Python 2.3 Method Resolution Order | Python.org</a></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/ac0463a135585152b32cdde9bede5b0b.png" alt="image-20230530143239195"></p>
+<p>对于<code>只能继承无法重写</code>的问题，解决思路：</p>
+<ul>
+<li>造成这个的本直原因是——先查询了子类的父类，而另一个子类的方法重写没有生效，也就是DFS中存在的问题</li>
+<li>把继承关系链看作一张<code>有向无环图</code>，使用<code>拓扑排序</code>的方式，构建一个<code>全序序列</code>，保证子类一定优先于父类被搜索</li>
+</ul>
+<p>对于上图的继承关系链，我们使用<code>拓扑排序</code>的方式来进行一次排序：</p>
+<ul>
+<li>首先找图中<code>入度 == 0</code> 的点，刚开始只有<code>A</code>，选择<code>A</code></li>
+<li>将<code>A</code>的边删除，再找<code>入度 == 0</code> 的点，只有<code>B、C</code></li>
+<li>按照<code>最左原则</code>，选择<code>B</code></li>
+<li>将<code>B</code>的边删除，再找<code>入度 == 0</code> 的点，只有<code>D、C</code></li>
+<li>按照<code>最左原则</code>，选择<code>D</code></li>
+<li>将<code>D</code>的边删除，再找<code>入度 == 0</code> 的点，只有<code>C</code></li>
+<li>选择<code>C</code>，删除<code>C</code>的边</li>
+<li>此时<code>入度 == 0</code>的点有<code>E、F</code></li>
+<li>按照<code>最左原则</code>，选择<code>E</code></li>
+<li>将<code>E</code>的边删除，再找<code>入度 == 0</code> 的点，只有<code>F</code></li>
+<li>选择<code>F</code></li>
+<li>最后选择<code>object</code></li>
+</ul>
+<p>所以最后的排序是<code>[A, B, D, C, E, F, object]</code></p>
+<p>C3算法就是在拓扑排序的基础上构建的，会对图中的每一个节点进行排序计算，一旦发现了逆序的存在就会产生一个<code>TypeError</code></p>
+<p>这也就从根源上禁止创建具有二义性的继承关系了</p>
+<table>
+<thead>
+<tr>
+<th>Graph</th>
+<th>Error</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://img-blog.csdnimg.cn/img_convert/4cf04c30aa6a8d886dd4db608b3d1814.png" alt="image-20230530131330330"></td>
+<td>Traceback (most recent call last):<br/>  File “e:&#x2F;myworks&#x2F;vscode_workspace&#x2F;python_workspace&#x2F;python_learning&#x2F;class_learning.py”, line 13, in <module><br/>    class G(E, F):<br/>TypeError: Cannot create a consistent method resolution<br/>order (MRO) for bases B, C</td>
+</tr>
+</tbody></table>
+<p>如果我们从算法角度来考虑C3算法，其实就是<code>把子类的MRO次序基于父类的MRO次序进行merge，并且在每次迭代的过程中，测试是否存在逆序的情况</code></p>
+<p>其中<code>merge</code>方法定义为：</p>
+<ul>
+<li><p>检查第一个序列的头元素，记作 H。</p>
+</li>
+<li><p>若 H 未出现在其它列表的尾部，则将其输出，并将其从所有列表中删除，然后回到步骤1；否则，取出下一个列表的头部记作 H，继续该步骤。(<strong>这个步骤，相当于拓扑排序中的查找并删除入度为0的节点。</strong>)</p>
+</li>
+<li><p>重复上述步骤，直至列表为空或者 不能再找出可以输出的元素。如果是前一种情况，则算法结束；如果是后一种情况，说明无法构建继承关系(存在二义性继承)，Python 会抛出异常。</p>
+</li>
+</ul>
+<p>我们来看不同的继承关系的C3算法的流程：</p>
+<table>
+<thead>
+<tr>
+<th>Graph</th>
+<th>C3 Code</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://img-blog.csdnimg.cn/img_convert/ac0463a135585152b32cdde9bede5b0b.png" alt="image-20230530143239195"></td>
+<td>mro(D) &#x3D; [D,O]<br/>mro(E) &#x3D; [E,O]<br/>mro(F) &#x3D; [F,O]<br/>mro(B) &#x3D; [B] + merge(mro(D),mro(E),[D,E])<br/>       &#x3D; [B] + merge([D,O],[E,O],[D,E]) # E符合merge条件<br/>       &#x3D; [B,D] + merge([O],[E,O],[D]) # D符合merge条件<br/>       &#x3D; [B,D,E] + merge([O],[O],[]) # O符合merge条件<br/>       &#x3D; [B,D,E,O]<br/>mro(C) &#x3D; [C] + merge(mro(E),mro(F),[E,F])<br/>       &#x3D; [C] + merge([E,O],[F,O],[E,F]) # E符合merge条件<br/>       &#x3D; [C,E] + merge([O],[F,O],[F]) # F符合merge条件<br/>       &#x3D; [C,E,F] + merge([O],[O],[]) # O符合merge条件<br/>       &#x3D; [C,E,F,O]<br/>mro(A) &#x3D; [A] + merge(mro(B),mro(C),[B,C])<br/>       &#x3D; [A] + merge([B,D,E,O] ,[C,E,F,O] ,[B,C]) # B符合merge条件<br/>       &#x3D; [A,B] + merge([D,E,O] ,[C,E,F,O] ,[C]) # D符合merge条件<br/>       &#x3D; [A,B,D] + merge([E,O] ,[C,E,F,O] ,[C]) # C符合merge条件<br/>       &#x3D; [A,B,D,C] + merge([E,O] ,[E,F,O] ,[]) # E符合merge条件<br/>       &#x3D; [A,B,D,C,E] + merge([O] ,[F,O] ,[]) # F符合merge条件<br/>       &#x3D; [A,B,D,C,E,F] + merge([O] ,[O] ,[]) # O符合merge条件<br/>       &#x3D; [A,B,D,C,E,F,O]</td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/img_convert/4cf04c30aa6a8d886dd4db608b3d1814.png" alt="image-20230530131330330"></td>
+<td>mro(B) &#x3D; [B, O]<br/>mro(C) &#x3D; [C, O]<br/>mro(E) &#x3D; [E] + merge(mro(B), mro(C), [B, C])<br/>       &#x3D; [E] + merge([B, O], [C, O], [B, C])<br/>       &#x3D; [E, B] + merge([O], [C, O], [C])<br/>       &#x3D; [E, B, C] + merge([O], [O], [])<br/>       &#x3D; [E, B, C, O]<br/>mro(F) &#x3D; [F] + merge(mro(C), mro(B), [C, B])<br/>       &#x3D; [F] + merge([C, O], [B, O], [C, B])<br/>       &#x3D; [F, C] + merge([O], [B, O], [B])<br/>       &#x3D; [F, C, B] + merge([O], [O], [])<br/>       &#x3D; [F, C, B, O]<br/>mro(G) &#x3D; [G] + merge(mro(E), mro(F), [E, F])<br/>       &#x3D; [G] + merge([E, B, C, O], [F, C, B, O], [E, F])<br/>       &#x3D; [G, E] + merge([B, C, O], [F, C, B, O], [F])<br/>       &#x3D; [G, E, F] + merge([B, C, O], [C, B, O], [])    # 矛盾出现</td>
+</tr>
+</tbody></table>
+<p>所以在Python3中，就是使用C3算法来进行MRO搜索的，确保了二义性的多继承不会出现！</p>
+<h2 id="super的细节"><a href="#super的细节" class="headerlink" title="super的细节"></a>super的细节</h2><p>super只能在<code>新式类</code>中使用！</p>
+<p>在一个class中，可以使用<code>super()</code>来获取到这个类在<code>mro</code>列表中的下一个类</p>
+<p>那你可能就会说了，<code>super</code>肯定是调用父类的属性或者方法！</p>
+<p>但是，<strong>这是错误的!</strong></p>
+<p>举一个例子！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">f1</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;A f1&quot;</span>)</span><br><span class="line">        <span class="built_in">super</span>().f1()</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">f1</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;B f1&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>(A, B):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">C().f1()</span><br></pre></td></tr></table></figure>
+
+<p>上述的代码会打印什么呢？答案是：</p>
+<ul>
+<li><p>A f1</p>
+</li>
+<li><p>B f1</p>
+</li>
+</ul>
+<p>明明A和B没有继承关系，为什么A中的<code>super().f1()</code>会执行B中的f1呢？</p>
+<p>其实是因为super看的是最初对象的<code>mro</code>列表</p>
+<p>C的mro是，<code>[&lt;class &#39;__main__.C&#39;&gt;, &lt;class &#39;__main__.A&#39;&gt;, &lt;class &#39;__main__.B&#39;&gt;, &lt;class &#39;object&#39;&gt;]</code></p>
+<p>所以在A中的<code>super()</code>获取到的是<code>mro</code>列表中<code>&lt;class &#39;__main__.A&#39;&gt;</code>的下一个，也就是<code> &lt;class &#39;__main__.B&#39;&gt;</code></p>
+<h2 id="Duck-Typing"><a href="#Duck-Typing" class="headerlink" title="Duck Typing"></a>Duck Typing</h2><p>duck typing就是我们常说的<code>鸭子类型</code></p>
+<p>在Python中，如果某个类实现了一些特定的方法，但是没有显式继承某个类，这个类也可以是某些类的子类！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections.abc <span class="keyword">import</span> Iterable</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyIter</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__iter__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">issubclass</span>(MyIter, Iterable))	<span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+
+<p>虽然这个<code>MyIter</code>没有明确写上继承自<code>Iterable</code>，但是通过<code>issubclass</code>的信息可以知道，<code>MyIter</code>就是<code>Iterable</code>的一个子类</p>
+<p>这就是<code>鸭子类型</code>，如果一个东西，它长得像鸭子，叫声像鸭子，走路像鸭子，那么它就是鸭子！</p>
+<p>而鸭子类型的实现，可以通过<code>__subclasshook__</code>这个魔术方法来实现！</p>
+<p>我们来看看<code>Iterable</code>的源码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Iterable</span>(metaclass=ABCMeta):</span><br><span class="line"></span><br><span class="line">    __slots__ = ()</span><br><span class="line"></span><br><span class="line"><span class="meta">    @abstractmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__iter__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">False</span>:</span><br><span class="line">            <span class="keyword">yield</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__subclasshook__</span>(<span class="params">cls, C</span>):</span><br><span class="line">        <span class="keyword">if</span> cls <span class="keyword">is</span> Iterable:</span><br><span class="line">            <span class="keyword">return</span> _check_methods(C, <span class="string">&quot;__iter__&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NotImplemented</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Iterable定义自己的<code>元类</code>是<code>ABCMeta</code>，有关元类的知识点之后再讨论。</li>
+<li>Iterable定义了一个<code>abstractmethod</code>，这个抽象方法装饰器的作用就是，如果一个类显式继承<code>Iterable</code>，那么这个类一定要有一个<code>__iter__</code>的方法，否则会报错</li>
+<li>Iterable定义了一个<code>classmethod</code>叫作<code>__subclasshook__</code>，这个方法在调用<code>issubclass()</code>函数的时候会被调用，检测C这个是否含有<code>__iter__</code>这方法，如果有，就返回True，那么在调用<code>issubclass</code>和<code>isinstance</code>的时候就会返回True，证明是子类</li>
+</ul>
+<p>说到了这里，其实Python中很多类型都实现了<code>__subclasshook__</code>这个方法，例如上面提到的<code>可迭代对象Iterable</code>，还有<code>迭代器Iterator</code>，还有<code>生成器Generator</code>，都是通过判断某个类中是否存在某些函数来判断是否是子类。</p>
+<p>其实可以自己编写一个demo：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> abc <span class="keyword">import</span> ABC</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyBaseClass</span>(<span class="title class_ inherited__">ABC</span>):</span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__subclasshook__</span>(<span class="params">cls, subclass</span>):</span><br><span class="line">        <span class="built_in">print</span>(cls)</span><br><span class="line">        <span class="built_in">print</span>(subclass)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">hasattr</span>(subclass, <span class="string">&#x27;my_method&#x27;</span>) <span class="keyword">and</span> <span class="built_in">callable</span>(subclass.my_method)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MySubClass</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">my_method</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Hello, World!&quot;</span>)</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">issubclass</span>(MySubClass, MyBaseClass)) 	<span class="comment"># True</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>(MySubClass(), MyBaseClass))<span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="抽象基类"><a href="#抽象基类" class="headerlink" title="抽象基类"></a>抽象基类</h2><p>如果不想使用<code>Duck Typing</code>的方式来实现多态，可以使用<code>抽象基类</code>的方式来规范父子类标准。</p>
+<p>从一个小demo看起：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> abc <span class="keyword">import</span> ABC, abstractmethod</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyBaseClass</span>(<span class="title class_ inherited__">ABC</span>):</span><br><span class="line"><span class="meta">    @abstractmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">need_this_func</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__subclasshook__</span>(<span class="params">cls, subclass</span>):</span><br><span class="line">        <span class="built_in">print</span>(cls)</span><br><span class="line">        <span class="built_in">print</span>(subclass)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">hasattr</span>(subclass, <span class="string">&#x27;my_method&#x27;</span>) <span class="keyword">and</span> <span class="built_in">callable</span>(subclass.my_method)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MySubClass</span>(<span class="title class_ inherited__">MyBaseClass</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">my_method</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Hello, World!&quot;</span>)</span><br><span class="line">        </span><br><span class="line">MySubClass()</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">Traceback (most recent call last):</span></span><br><span class="line"><span class="string">  File &quot;e:/myworks/vscode_workspace/python_workspace/python_learning/class_learning.py&quot;, line 88, in &lt;module&gt;</span></span><br><span class="line"><span class="string">    MySubClass()</span></span><br><span class="line"><span class="string">TypeError: Can&#x27;t instantiate abstract class MySubClass with abstract methods need_this_func</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>上述代码实现了一个抽象基类<code>MyBaseClass</code>，因为这个类继承了<code>abc.ABC</code>，而<code>abc.ABC</code>的元类是<code>abc.ABCMeta</code>，这个元类规范了<code>使用了abstractmethod修饰的函数一定要在子类中实现，否则报错</code></p>
+<p>所以在我们自己写的<code>MySubClass</code>中，<code>显式继承</code>了<code>MyBaseClass</code>，如果没有实现<code>need_this_func</code>，那么就会报错！</p>
+<p>使用<code>抽象基类</code>的方式可以更好的规范我们的父子类代码！</p>
+<h2 id="类方法与静态方法"><a href="#类方法与静态方法" class="headerlink" title="类方法与静态方法"></a>类方法与静态方法</h2><p>类方法在class中可以使用装饰器<code>@classmethod</code>来修饰，第一个参数是<code>cls</code>，表示当前这个类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">X</span>:</span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">instance</span>(<span class="params">cls</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">hasattr</span>(cls, <span class="string">&quot;_obj&quot;</span>):</span><br><span class="line">            <span class="keyword">return</span> cls._obj</span><br><span class="line">        cls._obj = X()</span><br><span class="line">        <span class="keyword">return</span> cls._obj</span><br><span class="line">    </span><br><span class="line"><span class="built_in">print</span>(X.instance())</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">dir</span>(X))</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&lt;__main__.X object at 0x000001EB271CFD30&gt;</span></span><br><span class="line"><span class="string">[&#x27;__class__&#x27;, &#x27;__delattr__&#x27;, &#x27;__dict__&#x27;, &#x27;__dir__&#x27;, &#x27;__doc__&#x27;, &#x27;__eq__&#x27;, &#x27;__format__&#x27;, &#x27;__ge__&#x27;, &#x27;__getattribute__&#x27;, &#x27;__gt__&#x27;, &#x27;__hash__&#x27;, &#x27;__init__&#x27;, &#x27;__init_subclass__&#x27;, &#x27;__le__&#x27;, &#x27;__lt__&#x27;, &#x27;__module__&#x27;, &#x27;__ne__&#x27;, &#x27;__new__&#x27;, &#x27;__reduce__&#x27;, &#x27;__reduce_ex__&#x27;, &#x27;__repr__&#x27;, &#x27;__setattr__&#x27;, &#x27;__sizeof__&#x27;, &#x27;__str__&#x27;, &#x27;__subclasshook__&#x27;, &#x27;__weakref__&#x27;, &#x27;_obj&#x27;, &#x27;instance&#x27;]</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里就用类方法类生成了一个实例，同时这也是<code>单例模式</code>的一种写法</p>
+<p>静态方法可以看作<code>类方法</code>少了<code>cls</code>这个参数，就相当于是绑定到一个类上的一个方法，不需要生成实例就可以调用的方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Util</span>:</span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">date</span>():</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;20230531&quot;</span></span><br><span class="line">    </span><br><span class="line"><span class="built_in">print</span>(Util.date())	<span class="comment"># &quot;20230531&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="metaclass"><a href="#metaclass" class="headerlink" title="metaclass"></a>metaclass</h2><p><code>metaclass</code>翻译成中文，就是<code>元类</code></p>
+<p>我们都知道，在Python中，万物皆<code>对象</code>，但是，思考一个问题——<strong>对象是由类创建的，那么类是由什么创建的呢？</strong></p>
+<p>答案是，<code>类是由其元类创建的</code>，同时<code>元类也是一种类</code></p>
+<h3 id="type元类"><a href="#type元类" class="headerlink" title="type元类"></a>type元类</h3><p>在Python的基础类型中，所有<code>基础类</code>的<code>元类</code>是<code>type</code></p>
+<p>你可能会疑惑了，<code>type不是用来查看某个对象的类的吗？</code></p>
+<p>但是<code>type</code>的用法远远不止这一条！</p>
+<p>我们先来证明一下<code>基本类型都是由元类构建的</code>，看如下的代码输出！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="built_in">str</span>(<span class="number">1</span>)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="built_in">str</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="built_in">int</span>(<span class="string">&quot;1&quot;</span>)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="built_in">int</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="built_in">list</span>(<span class="string">&quot;123&quot;</span>)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="built_in">list</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="built_in">tuple</span>(<span class="string">&quot;123&quot;</span>)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="built_in">tuple</span>))</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&lt;class &#x27;str&#x27;&gt;</span></span><br><span class="line"><span class="string">&lt;class &#x27;type&#x27;&gt;</span></span><br><span class="line"><span class="string">&lt;class &#x27;int&#x27;&gt;</span></span><br><span class="line"><span class="string">&lt;class &#x27;type&#x27;&gt;</span></span><br><span class="line"><span class="string">&lt;class &#x27;list&#x27;&gt;</span></span><br><span class="line"><span class="string">&lt;class &#x27;type&#x27;&gt;</span></span><br><span class="line"><span class="string">&lt;class &#x27;tuple&#x27;&gt;</span></span><br><span class="line"><span class="string">&lt;class &#x27;type&#x27;&gt;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>发现了没有：</p>
+<ul>
+<li>所有由基本类型构建的对象执行<code>type()</code>后，都指向这个类</li>
+<li>基本类型的<code>type()</code>执行后，返回的都是<code>&lt;class &#39;type&#39;&gt;</code></li>
+<li>这个<code>&lt;class &#39;type&#39;&gt;</code>其实就是<code>metaclass</code>，也就是<code>元类</code></li>
+</ul>
+<p>来解释一下相关概念：</p>
+<ul>
+<li>元类：<code>实例化产生类的类</code></li>
+<li>元类 –&gt; 元类.实例化() –&gt; 类 –&gt; 类.实例化() –&gt; 对象</li>
+</ul>
+<p>既然我们知道了基本的数据类型都是由<code>type</code>这个类构建而来的，那么我们可以不使用<code>class</code>这种关键字创建出一个<code>类</code>吗？</p>
+<p>答案是——<strong>肯定可以！</strong></p>
+<p>我们就使用最基本的metaclass——<code>type</code>，来实现无<code>class</code>关键字构造一个<code>类</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class_name = <span class="string">&quot;Wood&quot;</span>     <span class="comment"># 类名</span></span><br><span class="line">class_bases = (<span class="built_in">object</span>, )<span class="comment"># 基类</span></span><br><span class="line">class_dic = &#123;&#125;</span><br><span class="line">class_body = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">def __init__(self):</span></span><br><span class="line"><span class="string">    pass</span></span><br><span class="line"><span class="string">def info(self):</span></span><br><span class="line"><span class="string">    print(&quot;test info&quot;)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="built_in">exec</span>(class_body, &#123;&#125;, class_dic) <span class="comment"># 使用exec将class_body中的内容装入class_dic中</span></span><br><span class="line">Wood = <span class="built_in">type</span>(class_name, class_bases, class_dic)</span><br><span class="line">obj = Wood()</span><br><span class="line">obj.info()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">dir</span>(obj))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(obj))</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">test info</span></span><br><span class="line"><span class="string">[&#x27;__class__&#x27;, &#x27;__delattr__&#x27;, &#x27;__dict__&#x27;, &#x27;__dir__&#x27;, &#x27;__doc__&#x27;, &#x27;__eq__&#x27;, &#x27;__format__&#x27;, &#x27;__ge__&#x27;, &#x27;__getattribute__&#x27;, &#x27;__gt__&#x27;, &#x27;__hash__&#x27;, &#x27;__init__&#x27;, &#x27;__init_subclass__&#x27;, &#x27;__le__&#x27;, &#x27;__lt__&#x27;, &#x27;__module__&#x27;, &#x27;__ne__&#x27;, &#x27;__new__&#x27;, &#x27;__reduce__&#x27;, &#x27;__reduce_ex__&#x27;, &#x27;__repr__&#x27;, &#x27;__setattr__&#x27;, &#x27;__sizeof__&#x27;, &#x27;__str__&#x27;, &#x27;__subclasshook__&#x27;, &#x27;__weakref__&#x27;, &#x27;info&#x27;]</span></span><br><span class="line"><span class="string">&lt;class &#x27;__main__.Wood&#x27;&gt;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>上述代码的输出结果已经告诉我们了，这个<code>Wood</code>类已经被创建了，并且是使用<code>type</code>的方式构建的！</p>
+<p>我们可以根据上述的代码思考一些问题：</p>
+<ul>
+<li>class关键字到底做了什么来构建了一个class？</li>
+<li>元类充当了什么样的一个角色？</li>
+</ul>
+<p>其实第一个问题思考一下就可以得出简单的答案：</p>
+<ul>
+<li>获取类名</li>
+<li>获取基类（父类）</li>
+<li>获取名称空间</li>
+<li>调用元类构建这个类</li>
+</ul>
+<p>第二个问题在刚开始就说了：</p>
+<ul>
+<li>元类的实例化对象是一个<code>类</code></li>
+</ul>
+<h3 id="自定义元类"><a href="#自定义元类" class="headerlink" title="自定义元类"></a>自定义元类</h3><p>先看一个demo，继承了type的元类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyMetaclass</span>(<span class="title class_ inherited__">type</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, *args, **kwargs</span>):</span><br><span class="line">        <span class="built_in">print</span>(args)</span><br><span class="line">        <span class="built_in">print</span>(kwargs)</span><br><span class="line">        <span class="built_in">print</span>(self)</span><br><span class="line">        <span class="built_in">print</span>(self.mro())</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">dir</span>(self))</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">X</span>(metaclass=MyMetaclass):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">func1</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">X()</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">(&#x27;X&#x27;, (), &#123;&#x27;__module__&#x27;: &#x27;__main__&#x27;, &#x27;__qualname__&#x27;: &#x27;X&#x27;, &#x27;func1&#x27;: &lt;function X.func1 at 0x000001D969F9C1F0&gt;&#125;)</span></span><br><span class="line"><span class="string">&#123;&#125;</span></span><br><span class="line"><span class="string">&lt;class &#x27;__main__.X&#x27;&gt;</span></span><br><span class="line"><span class="string">[&lt;class &#x27;__main__.X&#x27;&gt;, &lt;class &#x27;object&#x27;&gt;]</span></span><br><span class="line"><span class="string">[&#x27;__class__&#x27;, &#x27;__delattr__&#x27;, &#x27;__dict__&#x27;, &#x27;__dir__&#x27;, &#x27;__doc__&#x27;, &#x27;__eq__&#x27;, &#x27;__format__&#x27;, &#x27;__ge__&#x27;, &#x27;__getattribute__&#x27;, &#x27;__gt__&#x27;, &#x27;__hash__&#x27;, &#x27;__init__&#x27;, &#x27;__init_subclass__&#x27;, &#x27;__le__&#x27;, &#x27;__lt__&#x27;, &#x27;__module__&#x27;, &#x27;__ne__&#x27;, &#x27;__new__&#x27;, &#x27;__reduce__&#x27;, &#x27;__reduce_ex__&#x27;, &#x27;__repr__&#x27;, &#x27;__setattr__&#x27;, &#x27;__sizeof__&#x27;, &#x27;__str__&#x27;, &#x27;__subclasshook__&#x27;, &#x27;__weakref__&#x27;, &#x27;func1&#x27;]</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到输出，<code>args</code>中有三个参数：</p>
+<ol>
+<li>类名</li>
+<li>基类（父类）</li>
+<li>命名空间</li>
+</ol>
+<p>所以可以看到，在<code>元类</code>的<code>__init__</code>参数中，传入了需要被构造的类的必要属性</p>
+<p>那么我们可以在<code>元类</code>中执行什么样的操作呢？同时又有如下几个疑点：</p>
+<ul>
+<li>如果仅仅是在<code>__init__</code>中注入一些属性，那么如何解释传入的参数中不存在<code>object</code>，但是<code>self.mro()</code>中又有<code>object</code>了？</li>
+<li>Python3中都是新生类，如何保证class申明后不显式继承<code>object</code>也会自动继承<code>object</code>？</li>
+<li>有什么方法是在<code>__init__</code>之前就执行的？</li>
+</ul>
+<p>我们一个一个来解答，首先来了解一个类的构建过程。</p>
+<h3 id="new"><a href="#new" class="headerlink" title="__new__"></a>__new__</h3><p>我们一般会把一个<code>class</code>的<code>__init__</code>函数当作构造函数。</p>
+<p>但是，其实真正创建一个类的函数是<code>__new__</code></p>
+<p>我们来看一个例子，证明<code>__new__</code>在<code>__init__</code>之前执行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyMetaclass</span>(<span class="title class_ inherited__">type</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, *args, **kwargs</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;-&quot;</span>*<span class="number">50</span>)</span><br><span class="line">        <span class="built_in">print</span>(args)</span><br><span class="line">        <span class="built_in">print</span>(kwargs)</span><br><span class="line">        <span class="built_in">print</span>(self)</span><br><span class="line">        <span class="built_in">print</span>(self.mro())</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">dir</span>(self))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__new__</span>(<span class="params">cls, *args, **kwargs</span>):</span><br><span class="line">        <span class="built_in">print</span>(cls)</span><br><span class="line">        <span class="built_in">print</span>(args)</span><br><span class="line">        <span class="built_in">print</span>(kwargs)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>().__new__(cls, *args, **kwargs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">X</span>(metaclass=MyMetaclass):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">func1</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">x = X()</span><br></pre></td></tr></table></figure>
+
+<p>我们直到<code>metaclass</code>构建一个类的流程，由<code>metaclass</code>创造一个<code>类对象</code>，上述代码中这个<code>类对象</code>就是<code>X</code>，再由<code>X</code>创造一个<code>类对象</code>，这个就是上述代码中的<code>x</code></p>
+<p>那么上述代码的输出是什么呢？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;class <span class="string">&#x27;__main__.MyMetaclass&#x27;</span>&gt;</span><br><span class="line">(<span class="string">&#x27;X&#x27;</span>, (), &#123;<span class="string">&#x27;__module__&#x27;</span>: <span class="string">&#x27;__main__&#x27;</span>, <span class="string">&#x27;__qualname__&#x27;</span>: <span class="string">&#x27;X&#x27;</span>, <span class="string">&#x27;func1&#x27;</span>: &lt;<span class="keyword">function</span> X.func1 at 0x0000013C3A89C280&gt;&#125;)</span><br><span class="line">&#123;&#125;</span><br><span class="line">--------------------------------------------------</span><br><span class="line">(<span class="string">&#x27;X&#x27;</span>, (), &#123;<span class="string">&#x27;__module__&#x27;</span>: <span class="string">&#x27;__main__&#x27;</span>, <span class="string">&#x27;__qualname__&#x27;</span>: <span class="string">&#x27;X&#x27;</span>, <span class="string">&#x27;func1&#x27;</span>: &lt;<span class="keyword">function</span> X.func1 at 0x0000013C3A89C280&gt;&#125;)</span><br><span class="line">&#123;&#125;</span><br><span class="line">&lt;class <span class="string">&#x27;__main__.X&#x27;</span>&gt;</span><br><span class="line">[&lt;class <span class="string">&#x27;__main__.X&#x27;</span>&gt;, &lt;class <span class="string">&#x27;object&#x27;</span>&gt;]</span><br><span class="line">[<span class="string">&#x27;__class__&#x27;</span>, <span class="string">&#x27;__delattr__&#x27;</span>, <span class="string">&#x27;__dict__&#x27;</span>, <span class="string">&#x27;__dir__&#x27;</span>, <span class="string">&#x27;__doc__&#x27;</span>, <span class="string">&#x27;__eq__&#x27;</span>, <span class="string">&#x27;__format__&#x27;</span>, <span class="string">&#x27;__ge__&#x27;</span>, <span class="string">&#x27;__getattribute__&#x27;</span>, <span class="string">&#x27;__gt__&#x27;</span>, <span class="string">&#x27;__hash__&#x27;</span>, <span class="string">&#x27;__init__&#x27;</span>, <span class="string">&#x27;__init_subclass__&#x27;</span>, <span class="string">&#x27;__le__&#x27;</span>, <span class="string">&#x27;__lt__&#x27;</span>, <span class="string">&#x27;__module__&#x27;</span>, <span class="string">&#x27;__ne__&#x27;</span>, <span class="string">&#x27;__new__&#x27;</span>, <span class="string">&#x27;__reduce__&#x27;</span>, <span class="string">&#x27;__reduce_ex__&#x27;</span>, <span class="string">&#x27;__repr__&#x27;</span>, <span class="string">&#x27;__setattr__&#x27;</span>, <span class="string">&#x27;__sizeof__&#x27;</span>, <span class="string">&#x27;__str__&#x27;</span>, <span class="string">&#x27;__subclasshook__&#x27;</span>, <span class="string">&#x27;__weakref__&#x27;</span>, <span class="string">&#x27;func1&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，<code>__new__</code>的输出早于<code>__init__</code>，所以我们的结论被证实了。</p>
+<ul>
+<li>每个<code>class</code>，都是由<code>__new__</code>构造出来的</li>
+<li><code>__new__</code>早于<code>__init__</code></li>
+</ul>
+<p>那么在哪个地方会让<code>metaclass</code>去调用<code>__new__</code>再去调用<code>__init__</code>，最终再去构造一个基本类呢？</p>
+<ul>
+<li>有一个魔术方法叫作<code>__call__</code>，就是一个<code>类的对象</code>在被调用的时候会执行的</li>
+</ul>
+<h3 id="call"><a href="#call" class="headerlink" title="__call__"></a>__call__</h3><p>如果在一个类中，指定了<code>__call__</code>方法，那么这个类的<code>实例化对象</code>也可以加上<code>()</code>被调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TestClass</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self.name = name</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self, *args, **kwds</span>):</span><br><span class="line">        <span class="built_in">print</span>(self.name)</span><br><span class="line"></span><br><span class="line">obj = TestClass(<span class="string">&quot;woodwhale&quot;</span>)</span><br><span class="line">obj()	<span class="comment"># woodwhale</span></span><br></pre></td></tr></table></figure>
+
+<p>上述代码中实例化的对象<code>obj</code>，如果被当作函数执行，就会触发<code>__call__</code>函数，从而执行<code>print(self.name)</code>这条语句</p>
+<ul>
+<li><code>__call__</code>函数是可以有返回值的，当作一个函数就好理解了</li>
+<li><code>__call__</code>函数还可以有参数，这点也和函数一样</li>
+</ul>
+<p>还记得如何使用<code>type</code>来构造一个<code>class</code>吗</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class_name = <span class="string">&quot;TestClass&quot;</span></span><br><span class="line">class_bases = (<span class="built_in">object</span>, )</span><br><span class="line">class_dic = &#123;&#125;</span><br><span class="line">class_body = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">def __init__(self):</span></span><br><span class="line"><span class="string">    pass</span></span><br><span class="line"><span class="string">def info(self):</span></span><br><span class="line"><span class="string">    print(&quot;test info&quot;)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="built_in">exec</span>(class_body, &#123;&#125;, class_dic) </span><br><span class="line">TestClass = <span class="built_in">type</span>(class_name, class_bases, class_dic)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>既然<code>type</code>是一个类，那么在调用<code>type()</code>的时候，其实触发的就是<code>type</code>这个类的<code>__call__</code>方法</li>
+<li>也就是说，在执行<code>type(class_name, class_bases, class_dic)</code>的时候，其实是在<code>__call__</code>函数中返回了一个<code>类对象</code></li>
+</ul>
+<p>让我们思考一个问题，一个最简单的<code>类</code>，它的<code>__init__</code>函数，为什么一定会被调用？</p>
+<ul>
+<li>其实就是因为最基本的类的元类是<code>type</code>，而在<code>type</code>的<code>__call__</code>函数中，会调用这个最基本类的<code>__new__</code>和<code>__init__</code></li>
+</ul>
+<p>那么如果我们编写一个<code>MyType</code>继承自<code>type</code>，同时在这个<code>MyType</code>的<code>__call__</code>中动手脚，是不是可以控制一个类的产生？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyMetaclass</span>(<span class="title class_ inherited__">type</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self, *args, **kwds</span>):</span><br><span class="line">        <span class="built_in">print</span>(self)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;__call__&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;woodwhale&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">X</span>(metaclass=MyMetaclass):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">func1</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"><span class="built_in">print</span>(X())</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&lt;class &#x27;__main__.X&#x27;&gt;</span></span><br><span class="line"><span class="string">__call__</span></span><br><span class="line"><span class="string">woodwhale</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到，这里<code>X()</code>的返回值是<code>woodwhale</code>，调用链如下：</p>
+<ol>
+<li><code>X()</code>的第一步会去先实例化一个<code>MyMetaclass</code></li>
+<li><code>MyMetaclass</code>的实例化对象是<code>X</code></li>
+<li>而<code>X()</code>其实就是<code>MyMetaclass</code>实例化对象被调用了，所以会触发<code>MyMetaclass</code>的<code>__call__</code>函数</li>
+<li>在<code>MyMetaclass</code>的<code>__call__</code>中，返回值是<code>woodwhale</code></li>
+<li>所以最后<code>print(X())</code>的结果是<code>woodwhale</code></li>
+</ol>
+<p>这样的调用链就很清晰了！</p>
+<p>那么我们可以在<code>__call__</code>中，实例化一个<code>X</code>的对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyMetaclass</span>(<span class="title class_ inherited__">type</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self, *args, **kwargs</span>):</span><br><span class="line">        <span class="built_in">print</span>(self)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;__call__&quot;</span>)</span><br><span class="line">        x_obj = self.__new__(self)</span><br><span class="line">        self.__init__(self, *args, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> x_obj</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">X</span>(metaclass=MyMetaclass):</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__new__</span>(<span class="params">cls, *args, **kwargs</span>):</span><br><span class="line">        <span class="comment"># return object.__new__(cls)</span></span><br><span class="line">        obj = <span class="built_in">super</span>().__new__(cls)</span><br><span class="line">        <span class="comment"># 随意操作！</span></span><br><span class="line">        <span class="keyword">return</span> obj</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;__init__&quot;</span>)</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">func1</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">x = X(<span class="string">&quot;123&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(x.name)</span><br></pre></td></tr></table></figure>
+
+<p>所以，如果我们想给一些类做定制化处理，可以在<code>metaclass</code>的<code>__call__</code>函数中处理</p>
+<h2 id="属性查找"><a href="#属性查找" class="headerlink" title="属性查找"></a>属性查找</h2><p>在通常的认知中，类与对象的属性查找的链子是：</p>
+<ul>
+<li>对象 –&gt; 类 –&gt; 父类 –&gt; object</li>
+<li>找不到就报错</li>
+</ul>
+<p>但是，在了解了<code>metaclass</code>这样的存在之后，其实查找链就有两种情况：</p>
+<ol>
+<li>对于对象</li>
+<li>对于类</li>
+</ol>
+<p>对于对象的查找顺序，其实还是我们认知中的链子：</p>
+<ul>
+<li>对象 –&gt; 类 –&gt; 父类 –&gt; object</li>
+<li>找不到就报错</li>
+</ul>
+<p>但是，对于类，就不同了，多了一个查找元类的链子：</p>
+<ul>
+<li>对象 –&gt; 类 –&gt; 父类 –&gt; object –&gt; 自定义的metaclass –&gt; type</li>
+<li>找不到就报错</li>
+</ul>
+<h2 id="After-All"><a href="#After-All" class="headerlink" title="After All"></a>After All</h2><p>上述内容仅仅针对<code>Python</code>代码层面的类，并没有分析<code>CPython</code>这种更深层次的源码分析，未来有时间一定看源码！</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2023/05/26/spring-find-job/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="更新时间"></i>
+              2023-06-02 11:26:50
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="分类"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/Python/" title="Python">
+                        <b>#</b> Python
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="标签"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/Python/" title="Python">
+                        #Python
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%90Python%E3%80%91Step-Into-Python-Class"><span class="toc-text">【Python】Step Into Python Class</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Before-All"><span class="toc-text">Before All</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B3%E6%98%8E%E4%B8%80%E4%B8%AA%E7%B1%BB"><span class="toc-text">申明一个类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E7%B1%BB%E4%B8%8E%E6%96%B0%E5%BC%8F%E7%B1%BB"><span class="toc-text">经典类与新式类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-text">继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%BB%A7%E6%89%BF"><span class="toc-text">单继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BB%A7%E6%89%BF"><span class="toc-text">多继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mixins"><span class="toc-text">Mixins</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8F%B1%E5%BD%A2%E7%BB%A7%E6%89%BF"><span class="toc-text">菱形继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E7%B1%BB%E7%9A%84DFS"><span class="toc-text">经典类的DFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%BC%8F%E7%B1%BB%E7%9A%84BFS"><span class="toc-text">新式类的BFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%BC%8FC3%E7%AE%97%E6%B3%95"><span class="toc-text">新式C3算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#super%E7%9A%84%E7%BB%86%E8%8A%82"><span class="toc-text">super的细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Duck-Typing"><span class="toc-text">Duck Typing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%9F%BA%E7%B1%BB"><span class="toc-text">抽象基类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E6%96%B9%E6%B3%95%E4%B8%8E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="toc-text">类方法与静态方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#metaclass"><span class="toc-text">metaclass</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#type%E5%85%83%E7%B1%BB"><span class="toc-text">type元类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B1%BB"><span class="toc-text">自定义元类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new"><span class="toc-text">__new__</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#call"><span class="toc-text">__call__</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E6%9F%A5%E6%89%BE"><span class="toc-text">属性查找</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#After-All"><span class="toc-text">After All</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Awoodwhale">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/Awoodwhale">Copyright © 2023 woodwhale</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

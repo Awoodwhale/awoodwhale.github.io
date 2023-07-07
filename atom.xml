@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>木鲸的记录</title>
+  <icon>http://awoodwhale.github.io/icon.png</icon>
+  <subtitle>木鲸的记录</subtitle>
+  <link href="http://awoodwhale.github.io/atom.xml" rel="self"/>
+  
+  <link href="http://awoodwhale.github.io/"/>
+  <updated>2023-06-02T03:26:50.798Z</updated>
+  <id>http://awoodwhale.github.io/</id>
+  
+  <author>
+    <name>woodwhale</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【Python】Step Into Python Class</title>
+    <link href="http://awoodwhale.github.io/2023/06/02/step-into-python-class/"/>
+    <id>http://awoodwhale.github.io/2023/06/02/step-into-python-class/</id>
+    <published>2023-06-02T03:25:48.000Z</published>
+    <updated>2023-06-02T03:26:50.798Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;【Python】Step-Into-Python-Class&quot;&gt;&lt;a href=&quot;#【Python】Step-Into-Python-Class&quot; class=&quot;headerlink&quot; title=&quot;【Python】Step Into Python</summary>
+        
+      
+    
+    
+    
+    <category term="Python" scheme="http://awoodwhale.github.io/categories/Python/"/>
+    
+    
+    <category term="Python" scheme="http://awoodwhale.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【Talk】春招实习总结</title>
+    <link href="http://awoodwhale.github.io/2023/05/26/spring-find-job/"/>
+    <id>http://awoodwhale.github.io/2023/05/26/spring-find-job/</id>
+    <published>2023-05-25T16:59:38.000Z</published>
+    <updated>2023-07-07T00:39:04.702Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="Talk" scheme="http://awoodwhale.github.io/categories/Talk/"/>
+    
+    
+    <category term="Talk" scheme="http://awoodwhale.github.io/tags/Talk/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【OS】Python模拟简单的操作系统</title>
+    <link href="http://awoodwhale.github.io/2023/04/27/os-python-simulate/"/>
+    <id>http://awoodwhale.github.io/2023/04/27/os-python-simulate/</id>
+    <published>2023-04-27T05:33:03.000Z</published>
+    <updated>2023-05-26T06:53:03.269Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;【OS】Python模拟简单的操作系统&quot;&gt;&lt;a href=&quot;#【OS】Python模拟简单的操作系统&quot; class=&quot;headerlink&quot; title=&quot;【OS】Python模拟简单的操作系统&quot;&gt;&lt;/a&gt;【OS】Python模拟简单的操作系统&lt;/h1&gt;&lt;h2</summary>
+        
+      
+    
+    
+    
+    <category term="OS" scheme="http://awoodwhale.github.io/categories/OS/"/>
+    
+    <category term="Python" scheme="http://awoodwhale.github.io/categories/Python/"/>
+    
+    <category term="Linux" scheme="http://awoodwhale.github.io/categories/Linux/"/>
+    
+    
+    <category term="OS" scheme="http://awoodwhale.github.io/tags/OS/"/>
+    
+    <category term="Python" scheme="http://awoodwhale.github.io/tags/Python/"/>
+    
+    <category term="Linux" scheme="http://awoodwhale.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【Talk】New Blog</title>
+    <link href="http://awoodwhale.github.io/2023/04/26/new-blog/"/>
+    <id>http://awoodwhale.github.io/2023/04/26/new-blog/</id>
+    <published>2023-04-26T03:45:14.000Z</published>
+    <updated>2023-05-26T06:56:16.226Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;New-Blog&quot;&gt;&lt;a href=&quot;#New-Blog&quot; class=&quot;headerlink&quot; title=&quot;New Blog&quot;&gt;&lt;/a&gt;New Blog&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;Use Github Pages With</summary>
+        
+      
+    
+    
+    
+    <category term="Talk" scheme="http://awoodwhale.github.io/categories/Talk/"/>
+    
+    
+    <category term="Talk" scheme="http://awoodwhale.github.io/tags/Talk/"/>
+    
+  </entry>
+  
+</feed>
